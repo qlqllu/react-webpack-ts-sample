@@ -4,14 +4,30 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    'index': './index.js',
+    'index': './index.tsx',
+  },
+  devtool: 'cheap-module-eval-source-map',
+  output: {
+    path: path.join(__dirname, 'dist')
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: [['env', {'modules': false}]],
+              plugins: ['babel-plugin-syntax-dynamic-import']
+            }
+          },
+          {loader: 'ts-loader'}
+        ]
       }
     ]
   },
@@ -20,10 +36,10 @@ module.exports = {
       title: 'app',
       template: 'index.html',
       filename: 'index.html',
-      inject: true,                 // we'll load modules through amd
+      inject: true,            
     })
   ],
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
 };

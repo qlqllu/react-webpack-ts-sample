@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "importHelpers": true,
+    "lib": [
+      "dom",
+      "es5",
+      "scripthost",
+      "es2015"
+    ],
+    "jsx": "react",
+    "noEmitHelpers": false,
+    "noUnusedLocals": false,
+    "allowUnreachableCode": true,
+    "baseUrl": ".",
+    "paths": {
+    }
+  },
+  "exclude": [
+    "node_modules",
+  ]
+}
