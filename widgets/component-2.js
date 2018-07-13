@@ -1,0 +1,1 @@
+export default 'there is b in localhost:3000, com2';

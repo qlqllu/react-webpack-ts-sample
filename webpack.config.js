@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const RequireFrom = require('webpack-require-from');
 
 module.exports = {
   entry: {
@@ -22,13 +23,13 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
-          {
+          /* {
             loader: 'babel-loader',
             query: {
               presets: [['env', {'modules': false}]],
               plugins: ['babel-plugin-syntax-dynamic-import']
             }
-          },
+          }, */
           {loader: 'ts-loader'}
         ]
       }
@@ -39,7 +40,12 @@ module.exports = {
       title: 'app',
       template: 'index.html',
       filename: 'index.html',
-      inject: true,            
+      inject: true
+    }),
+    new	 RequireFrom({
+      methodName: 'setSDN',
+      // path: 'customPath/',
+      replaceSrcMethodName: 'replaceDynamicSrc'
     })
   ],
   devServer: {
