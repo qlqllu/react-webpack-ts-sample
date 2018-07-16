@@ -1,11 +1,8 @@
 import * as React from 'react';
 //var SystemJS = require('./system-production.js');
 
-global.replaceDynamicSrc = function (src) {
+/* global.replaceDynamicSrc = function (src) {
   console.log("Manipulating ", src);
-  /* if(src.indexOf('jquery.js')){
-    return "https://code.jquery.com/jquery-3.3.1.min.js";
-  } */
   if(src.indexOf('remote-widget.js') > -1){
     return 'http://localhost:3000/remote-widget.js';
   }
@@ -16,19 +13,11 @@ global.replaceDynamicSrc = function (src) {
 
 global.setSDN = function () {
 	return window.location.host;
-}
+} */
 
 interface State{
   modules: {[moduleId: string]: any}
 }
-
-/* SystemJS.config({
-  map: {
-    jquery: '//code.jquery.com/jquery-2.1.4.min.js'
-  }
-});
-
-import $ from 'jquery'; */
 
 class App extends React.Component<{}, State> {
   constructor(props){
@@ -51,7 +40,7 @@ class App extends React.Component<{}, State> {
   loadJQuery = () => {
     let domain = 'http://localhost:3000';
     let jqueryUrl = `${domain}/a.js`;
-    import(/* webpackChunkName: "remote-widget" */ `./widgets/widget`).then(module => {
+    import(/* webpackChunkName: "remote-widget" */ `${domain}/remote-widget.js`).then(module => {
       this.setState({
         modules: Object.assign({}, this.state.modules, {widget: module})
       });

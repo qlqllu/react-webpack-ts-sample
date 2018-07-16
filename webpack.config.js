@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const RequireFrom = require('webpack-require-from');
+const DynamicImportPlugin = require('./dynamic-import-plugin');
 
 module.exports = {
   entry: {
@@ -14,9 +15,6 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
-  /* node: {
-    fs: "empty"
- }, */
   module: {
     rules: [
       {
@@ -27,7 +25,7 @@ module.exports = {
             loader: 'babel-loader',
             query: {
               presets: [['env', {'modules': false}]],
-              plugins: ['babel-plugin-syntax-dynamic-import']
+              plugins: ['dynamic-import-webpack']
             }
           }, */
           {loader: 'ts-loader'}
@@ -42,11 +40,12 @@ module.exports = {
       filename: 'index.html',
       inject: true
     }),
-    new	 RequireFrom({
+    new DynamicImportPlugin()
+   /*  new	 RequireFrom({
       methodName: 'setSDN',
       // path: 'customPath/',
       replaceSrcMethodName: 'replaceDynamicSrc'
-    })
+    }) */
   ],
   devServer: {
     contentBase: './dist',
