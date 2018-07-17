@@ -1,4 +1,5 @@
 import * as React from 'react';
+//import './dynamic-import-loader?modlues!http://localhost:3000/widget.js';
 //var SystemJS = require('./system-production.js');
 
 /* global.replaceDynamicSrc = function (src) {
@@ -40,7 +41,7 @@ class App extends React.Component<{}, State> {
   loadJQuery = () => {
     let domain = 'http://localhost:3000';
     let jqueryUrl = `${domain}/a.js`;
-    import(/* webpackChunkName: "remote-widget" */ `${domain}/remote-widget.js`).then(module => {
+    import(/* webpackChunkName: "remote-widget" */ 'http://localhost:3000/widget.js').then(module => {
       this.setState({
         modules: Object.assign({}, this.state.modules, {widget: module})
       });

@@ -6,7 +6,7 @@ class DynamicImportPlugin{
     compiler.hooks.make.tap('DynamicImportPlugin', compiler => {
       console.log('===========DynamicImportPlugin============');
       //console.log(compiler);
-    })
+    });
   }
 }
 
